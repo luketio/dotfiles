@@ -88,7 +88,7 @@ sysclean() {
 
 	sudo pacman -Rns $(pacman -Qtdq)
 	sudo paru -Rns $(paru -Qtdq)
-	
+
 	# Clear paccache
 	sudo pacman -Scc
 }
@@ -126,3 +126,7 @@ ex ()
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.dwm/layoutmenu.sh:$PATH"
+export PATH="$HOME/.cargo/bin/:$PATH"

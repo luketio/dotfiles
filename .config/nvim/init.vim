@@ -14,6 +14,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'tommcdo/vim-lion'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
@@ -258,3 +259,4 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 set clipboard=unnamedplus
 
+au BufRead,BufNewFile *.asm set filetype=nasm
