@@ -1,74 +1,30 @@
 call plug#begin()
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'wlangstroth/vim-racket'
-Plug 'sheerun/vim-polyglot'
-Plug 'rust-lang/rust.vim'
-Plug 'preservim/tagbar'
-Plug 'universal-ctags/ctags'
-Plug 'luochen1990/rainbow'
-Plug 'vim-syntastic/syntastic'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-surround'
+Plug 'joshdick/onedark.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'tommcdo/vim-lion'
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'itchyny/lightline.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'editorconfig/editorconfig-vim'
+" Plug 'preservim/tagbar'
+" Plug 'universal-ctags/ctags'
+" Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+Plug 'vim-syntastic/syntastic'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-
 call plug#end()
 
-" Get syntax files from config folder
-set runtimepath+=~/.config/nvim/syntax
-
 " Theme
-colorscheme palenight
-set background=dark
-
-" Disable C-z from job-controlling neovim
-nnoremap <c-z> <nop>
-
-" Remap C-c to <esc>
-nmap <c-c> <esc>
-imap <c-c> <esc>
-vmap <c-c> <esc>
-omap <c-c> <esc>
-
-" Syntax highlighting
+colorscheme onedark
 syntax on
+set background=dark
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 
-" Position in code
-set number
-set ruler
-
-" Don't make noise
-set visualbell
-
-" default file encoding
 set encoding=utf-8
-
-" Line wrap
+set number
+set visualbell
 set wrap
-
-" Function to set tab width to n spaces
-function! SetTab(n)
-    let &l:tabstop=a:n
-    let &l:softtabstop=a:n
-    let &l:shiftwidth=a:n
-    set expandtab
-endfunction
-
-command! -nargs=1 SetTab call SetTab(<f-args>)
-
-" Function to trim extra whitespace in whole file
-function! Trim()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-command! -nargs=0 Trim call Trim()
-
-set laststatus=2
+set mouse=a
+set clipboard=unnamedplus
 
 " Highlight search results
 set hlsearch
@@ -78,38 +34,27 @@ set incsearch
 set autoindent
 set smartindent
 
+set laststatus=2
 set t_Co=256
 
-" SQL++ == SQL
-augroup sqlpp_ft
-  au!
-  autocmd BufNewFile,BufRead *.sqlp   set syntax=sql
-augroup END
+nnoremap <c-z> <nop> " Disable C-z from job-controlling neovim
 
-" Mouse support
- set mouse=a
+" CTags config
+let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 
- " Map F8 to Tagbar
- nmap <F8> :TagbarToggle<CR>
+" disable backup files
+set nobackup
+set nowritebackup
 
- " CTags config
- let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+" no delays!
+set updatetime=300
 
- " disable backup files
- set nobackup
- set nowritebackup
+set cmdheight=1
+set shortmess+=c
 
- " no delays!
- set updatetime=300
-
- set cmdheight=1
- set shortmess+=c
-
- set signcolumn=yes
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -245,7 +190,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " add cocstatus into lightline
 let g:lightline = {
-	\ 'colorscheme': 'one',
+	\ 'colorscheme': 'onedark',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
 	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -256,7 +201,3 @@ let g:lightline = {
 	\ }
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-set clipboard=unnamedplus
-
-au BufRead,BufNewFile *.asm set filetype=nasm
