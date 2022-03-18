@@ -1,6 +1,5 @@
 call plug#begin()
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'wlangstroth/vim-racket'
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim'
@@ -23,6 +22,7 @@ set runtimepath+=~/.config/nvim/syntax
 
 " Theme
 colorscheme palenight
+set background=dark
 
 " Disable C-z from job-controlling neovim
 nnoremap <c-z> <nop>
@@ -245,7 +245,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " add cocstatus into lightline
 let g:lightline = {
-	\ 'colorscheme': 'wombat',
+	\ 'colorscheme': 'one',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
 	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
